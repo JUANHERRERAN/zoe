@@ -1,0 +1,698 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Baby Shower de Zoe Adhara</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500;1,700;1,800&family=Mulish:wght@400;500;600;700&display=swap">
+<style>
+/* Un solo recorrido sin bloques: la foto siempre detras y un velo que cambia de color poco a poco mientras el cuento va bajando. */
+:root{
+  --manzana:#420001; --manzana-honda:#260002; --manzana-luz:#7c0a12;
+  --cielo:#bfe3fa; --cielo-hondo:#2f6f9f; --rosa:#f9d3df; --rosa-viva:#e58aa6; --rosa-tierra:#b4533f;
+  --nieve:#fffafa; --arena:#ccbaa6;
+  --cuento:"Playfair Display",Georgia,"Times New Roman",serif;
+  --texto:Mulish,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;overflow-x:clip;background:var(--manzana)}
+body{margin:0;background:var(--arena);color:var(--manzana);font-family:var(--texto);font-size:16px;line-height:1.6;overflow-x:clip;position:relative;isolation:isolate}
+html.cerrado,html.cerrado body{overflow:hidden;height:100%}
+h1,h2,h3,p{margin:0}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--cielo-hondo);outline-offset:3px}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* Foto y velo */
+.fondo{position:fixed;inset:0;z-index:-3;overflow:hidden;background:linear-gradient(180deg,#ccbaa6 0%,#d0bea9 42%,#e6d6c2 72%,#f6ecda 100%)}
+.fondo img{position:absolute;bottom:0;left:50%;width:max(125vw,66vh);max-width:none;height:auto;transform:translateX(-50%);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 13%);mask-image:linear-gradient(180deg,transparent 0,#000 13%);animation:acercar 2.6s var(--ease) both;animation-play-state:paused;transform-origin:50% 100%}
+html.abierto .fondo img{animation-play-state:running}
+@keyframes acercar{from{scale:1.09}}
+@media (min-aspect-ratio:1/1){
+  .fondo img{left:auto;right:2vw;width:auto;height:100vh;transform:none;transform-origin:70% 100%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 90%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 90%,transparent 100%)}
+}
+.velo{position:fixed;inset:0;z-index:-2;pointer-events:none;background:rgba(38,0,2,0)}
+.velo::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(38,0,2,var(--borde,0)) 100%)}
+
+/* Portada con telon */
+.telon{position:fixed;inset:0;z-index:60;overflow:hidden}
+.hoja{position:absolute;top:0;bottom:0;width:50.2%;overflow:hidden;transition:transform 1.7s cubic-bezier(.7,0,.2,1);will-change:transform}
+.hoja.izq{left:0}
+.hoja.der{right:0}
+.hoja .escena{position:absolute;top:0;bottom:0;width:100vw}
+.hoja.izq .escena{left:0}
+.hoja.der .escena{right:0}
+.telon.abriendo .hoja.izq{transform:translateX(-101%)}
+.telon.abriendo .hoja.der{transform:translateX(101%)}
+.escena{display:grid;place-items:center;align-content:center;gap:clamp(12px,2.6vh,24px);text-align:center;color:var(--nieve);padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:radial-gradient(ellipse at 50% 42%,rgba(150,16,26,.62),transparent 58%),repeating-linear-gradient(90deg,#2a0002 0,#4b0204 34px,#5a0508 58px,#420001 82px,#2a0002 122px),var(--manzana)}
+.erase{position:relative;font-family:var(--cuento);font-style:italic;font-weight:500;font-size:clamp(28px,5.8vw,44px);color:var(--rosa);line-height:1.1;animation:llega 1.4s var(--ease) both}
+.princesa{position:relative;font-size:clamp(11px,2.3vw,14px);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--cielo);animation:llega 1.4s .25s var(--ease) both}
+.manzana-grande{position:relative;width:min(58vw,40vh,340px);aspect-ratio:1;display:block;filter:drop-shadow(0 26px 34px rgba(0,0,0,.6));animation:latir 3.4s ease-in-out infinite}
+@keyframes latir{50%{transform:translateY(-8px) scale(1.025)}}
+@keyframes llega{from{opacity:0;translate:0 18px}}
+.abrir{position:relative;appearance:none;border:0;border-radius:999px;padding:15px 34px;background:var(--nieve);color:var(--manzana);font-family:var(--cuento);font-style:italic;font-weight:700;font-size:19px;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:llamar 2.4s 1s infinite}
+@keyframes llamar{0%{box-shadow:0 12px 30px rgba(0,0,0,.45),0 0 0 0 rgba(191,227,250,.7)}70%,100%{box-shadow:0 12px 30px rgba(0,0,0,.45),0 0 0 20px rgba(191,227,250,0)}}
+.activa{position:absolute;inset:0;background:none;visibility:hidden}
+.activa .abrir{visibility:visible;opacity:0;animation:none}
+.escena .rama{position:absolute;width:min(64vw,420px);opacity:.92}
+.escena .rama.a{top:-2%;left:-7%}
+.escena .rama.b{bottom:-2%;right:-7%;rotate:180deg}
+.destello{position:fixed;inset:0;z-index:59;background:radial-gradient(circle at 50% 46%,#fff 0,rgba(255,255,255,.75) 26%,rgba(255,255,255,0) 72%);opacity:0;pointer-events:none}
+.telon.abriendo~.destello{animation:destello 1.6s ease-out}
+@keyframes destello{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
+
+/* Palomas y polvo magico */
+.paloma{position:fixed;left:0;top:0;z-index:70;width:var(--t,76px);pointer-events:none;will-change:transform}
+.paloma svg{display:block;width:100%;overflow:visible}
+.paloma .ala{transform-box:view-box;transform-origin:64px 40px;animation:aletear var(--f,.36s) ease-in-out infinite alternate}
+.paloma .ala.lejos{animation-delay:calc(var(--f,.36s) * -.3)}
+@keyframes aletear{from{transform:scaleY(1)}to{transform:scaleY(-.62)}}
+canvas.petalos{position:fixed;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
+
+/* Ramas de flor de manzano */
+.rama{display:block;height:auto;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(38,0,2,.16))}
+main .rama{position:absolute;z-index:0;width:clamp(150px,36vw,430px);transform-origin:50% 50%;animation:mecer 7s ease-in-out infinite alternate}
+.rama.sup-izq{top:-6px;left:-20px}
+.rama.sup-der{top:-6px;right:-20px;scale:-1 1;animation-delay:-2.3s}
+.rama.inf-izq{bottom:-6px;left:-20px;scale:1 -1;animation-delay:-4s}
+.rama.inf-der{bottom:-6px;right:-20px;scale:-1 -1;animation-delay:-1.1s}
+@keyframes mecer{from{rotate:-1.6deg}to{rotate:1.8deg}}
+
+/* Tipografia en degradado, nunca de un solo color */
+.titular{font-family:var(--cuento);font-style:italic;font-weight:700;line-height:1.02;letter-spacing:-.005em;text-wrap:balance;padding-bottom:.08em;-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% 100%;animation:brillo 11s ease-in-out infinite alternate}
+@keyframes brillo{to{background-position:100% 0}}
+.claro .titular,.inicio .titular{background-image:linear-gradient(100deg,#420001,#8a1a2e 35%,#c9607a 62%,#7c0a12)}
+.oscuro .titular{background-image:linear-gradient(100deg,#ffffff,#f9d3df 38%,#bfe3fa 66%,#ffffff)}
+.etiqueta{font-weight:600;font-size:clamp(11px,1.5vw,13px);letter-spacing:.32em;text-transform:uppercase}
+
+/* Inicio */
+.inicio{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;padding-block:clamp(22px,4vh,44px) 20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.inicio>:not(.rama){position:relative;z-index:1}
+.baby{font-family:var(--cuento);font-style:italic;line-height:.98;display:grid;font-size:clamp(34px,9.8vw,60px)}
+.baby b{font-weight:800;justify-self:start;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(95deg,#7c0a12,#b4533f)}
+.baby span{font-weight:400;padding-left:.82em;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(95deg,#9a3f2e,#c26a55)}
+.nombre{font-size:clamp(46px,14vw,104px);margin-top:.12em}
+.padres{font-family:var(--cuento);font-style:italic;font-weight:500;font-size:clamp(16px,2.2vw,22px);line-height:1.25}
+.padres b{font-weight:700;white-space:nowrap}
+.dia{margin-top:6px;display:flex;align-items:center;gap:10px;font-family:var(--cuento);font-weight:700;font-size:clamp(15px,1.8vw,19px);color:var(--manzana)}
+.dia::before,.dia::after{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--manzana))}
+.dia::after{scale:-1 1}
+.abajo{position:absolute!important;bottom:clamp(14px,3vh,28px);left:0;right:0;margin-inline:auto;width:fit-content;display:grid;justify-items:center;gap:0;text-decoration:none;color:var(--manzana);font-family:var(--cuento);font-style:italic;font-weight:700;font-size:15px;text-shadow:0 0 12px rgba(255,250,250,.9)}
+.abajo svg{width:22px;height:22px;animation:rebote 1.6s ease-in-out infinite}
+@keyframes rebote{50%{translate:0 5px}}
+@media (min-aspect-ratio:1/1){
+  .inicio{align-items:flex-start;justify-content:center;text-align:left;padding-left:max(7vw,env(safe-area-inset-left,0px));gap:8px}
+  .baby{font-size:clamp(40px,min(5vw,9vh),84px)}
+  .nombre{font-size:clamp(60px,min(7.4vw,14vh),136px)}
+  .abajo{left:max(7vw,16px);right:auto;margin-inline:0;justify-items:start}
+}
+.js-entrada{opacity:0;translate:0 -26px}
+html.abierto .js-entrada{opacity:1;translate:0 0;transition:opacity 1.3s var(--ease),translate 1.3s var(--ease);transition-delay:calc(.75s + var(--d,0) * .17s)}
+
+/* Capitulos sin bloques */
+.capitulo{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:grid;align-items:center;padding-block:clamp(70px,13vh,130px)}
+.dentro{position:relative;z-index:1;width:100%;max-width:760px;margin-inline:auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px));display:grid;justify-items:center;gap:clamp(20px,3.4vh,34px);text-align:center}
+h2.titular{font-size:clamp(42px,8.6vw,76px)}
+.oscuro{color:var(--nieve)}
+.oscuro .etiqueta{color:var(--cielo)}
+.claro .etiqueta{color:var(--cielo-hondo)}
+.relato{font-family:var(--cuento);font-style:italic;font-weight:500;font-size:clamp(22px,3.6vw,30px);line-height:1.4;max-width:27em;text-wrap:balance}
+.relato em{font-style:italic;font-weight:700;color:var(--rosa)}
+.adorno{display:flex;align-items:center;gap:12px;width:min(260px,70%)}
+.adorno::before,.adorno::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,currentColor)}
+.adorno::after{scale:-1 1}
+.adorno i{width:7px;height:7px;background:currentColor;rotate:45deg;flex:none}
+.oscuro .adorno{color:var(--cielo)}
+.claro .adorno{color:var(--rosa-viva)}
+.respiro{height:78vh;height:78svh;position:relative;overflow:hidden}
+
+/* El espejo magico */
+.pregunta{font-family:var(--cuento);font-style:italic;font-weight:500;font-size:clamp(23px,3.8vw,31px);line-height:1.22;color:var(--rosa);text-wrap:balance}
+.espejo{position:relative;width:min(100%,410px);aspect-ratio:400/540;margin-block:8px 4px}
+.marco-espejo{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 26px 40px rgba(0,0,0,.55))}
+.cristal{position:absolute;left:10.5%;right:10.5%;top:10%;bottom:10%;border-radius:50%;overflow:hidden;background:radial-gradient(ellipse at 50% 34%,#fff 0,#eaf7ff 44%,var(--cielo) 82%,#93c9ec 100%);box-shadow:inset 0 0 26px rgba(47,111,159,.6);display:grid;place-items:center;align-content:center;gap:clamp(2px,1vw,8px);padding:4% 6%;color:var(--manzana)}
+.cristal::after{content:"";position:absolute;top:-30%;bottom:-30%;left:-60%;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);rotate:18deg;animation:reflejo 6.5s ease-in-out infinite;pointer-events:none}
+@keyframes reflejo{0%,55%{translate:0 0}100%{translate:520% 0}}
+.dias{display:grid;justify-items:center;line-height:1}
+.dias .cifras{font-size:clamp(72px,19vw,104px)}
+.dias small{font-size:clamp(10px,2.6vw,13px);font-weight:700;letter-spacing:.26em;text-transform:uppercase;margin-top:2px}
+.resto{display:flex;align-items:flex-start;justify-content:center;gap:clamp(3px,1.2vw,8px)}
+.unidad{display:grid;justify-items:center;line-height:1;min-width:0}
+.unidad .cifras{font-size:clamp(30px,8.4vw,44px)}
+.unidad small{font-size:clamp(8px,2vw,10px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.dos{font-family:var(--cuento);font-weight:700;font-size:clamp(24px,6.6vw,34px);line-height:1;color:var(--manzana-luz)}
+.cifras{display:inline-flex;font-family:var(--cuento);font-weight:700;font-variant-numeric:lining-nums tabular-nums;color:var(--manzana)}
+.casilla{position:relative;display:block;width:.64em;height:1.12em;overflow:hidden}
+.casilla span{position:absolute;inset:0;text-align:center;line-height:1.12}
+.casilla .sale{animation:sale .55s var(--ease) both}
+.casilla .entra{animation:entra .55s var(--ease) both}
+@keyframes sale{to{transform:translateY(100%);opacity:0}}
+@keyframes entra{from{transform:translateY(-100%);opacity:0}}
+.para{font-family:var(--cuento);font-style:italic;font-weight:500;font-size:clamp(12px,2.8vw,15px);line-height:1.2;color:var(--cielo-hondo);max-width:13em;text-align:center}
+.gran-dia{display:none;font-family:var(--cuento);font-style:italic;font-weight:700;font-size:clamp(34px,9vw,48px);line-height:1.08;text-align:center;color:var(--manzana)}
+.espejo.fin .dias,.espejo.fin .resto,.espejo.fin .para{display:none}
+.espejo.fin .gran-dia{display:block}
+
+/* Detalles */
+.datos{width:100%;max-width:640px;display:grid;gap:clamp(22px,3.8vh,36px);margin:0;padding:0;list-style:none}
+.datos li{display:grid;justify-items:center;gap:3px}
+.datos span{font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--cielo-hondo)}
+.datos b{font-family:var(--cuento);font-style:italic;font-weight:700;font-size:clamp(25px,4.6vw,38px);line-height:1.15;text-wrap:balance;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(95deg,#420001,#a02a42)}
+.datos b.pronto{font-weight:500;background-image:linear-gradient(95deg,#7c0a12,#c9607a)}
+
+/* Confirmacion */
+.guia{font-family:var(--cuento);font-style:italic;font-size:clamp(20px,3vw,25px);line-height:1.34;font-weight:500;max-width:25em;text-wrap:balance}
+form{width:100%;max-width:520px;display:grid;gap:20px;text-align:left}
+label,.rotulo{display:block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px;color:var(--manzana);padding:0}
+input[type=text],textarea{width:100%;border:0;border-bottom:1.5px solid var(--manzana-luz);border-radius:12px 12px 2px 2px;background:rgba(255,255,255,.62);padding:13px 15px;font-size:16px;color:var(--manzana);transition:background .25s,box-shadow .25s}
+input[type=text]::placeholder,textarea::placeholder{color:#7a4a50}
+input[type=text]:focus,textarea:focus{outline:none;background:#fff;box-shadow:0 0 0 3px var(--cielo-hondo)}
+textarea{min-height:92px;resize:vertical}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+.opciones{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opciones input{position:absolute;opacity:0;width:1px;height:1px}
+.opciones label{display:grid;place-items:center;text-align:center;margin:0;min-height:60px;padding:10px;border-radius:14px;background:rgba(255,255,255,.62);cursor:pointer;font-family:var(--cuento);font-style:italic;font-weight:700;font-size:18px;line-height:1.1;letter-spacing:0;text-transform:none;transition:color .25s,scale .25s var(--ease),box-shadow .25s}
+.opciones input:checked+label{background:linear-gradient(120deg,#260002,#7c0a12);color:var(--nieve);scale:1.02;box-shadow:0 12px 24px -10px rgba(38,0,2,.75)}
+.opciones input:focus-visible+label{outline:3px solid var(--cielo-hondo);outline-offset:3px}
+.contador-personas{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.62);border-radius:999px;padding:5px}
+.contador-personas button{appearance:none;border:0;width:42px;height:42px;border-radius:50%;background:linear-gradient(120deg,#260002,#7c0a12);color:var(--nieve);font-size:21px;line-height:1}
+.contador-personas output{min-width:52px;text-align:center;font-family:var(--cuento);font-weight:700;font-size:25px;font-variant-numeric:lining-nums tabular-nums}
+.error{min-height:1.4em;font-weight:700;font-size:14px;color:var(--manzana-luz)}
+.enviar{appearance:none;border:0;border-radius:999px;padding:16px 26px;background:linear-gradient(120deg,#260002,#7c0a12 60%,#a21a2a);color:var(--nieve);font-family:var(--cuento);font-style:italic;font-weight:700;font-size:19px;transition:scale .3s var(--ease),box-shadow .3s;width:100%;box-shadow:0 16px 30px -14px rgba(38,0,2,.8)}
+.enviar:hover{scale:1.015}
+.gracias{display:grid;justify-items:center;gap:14px;max-width:30em}
+.gracias h3.titular{font-size:clamp(40px,8vw,62px)}
+.gracias p{font-family:var(--cuento);font-style:italic;font-weight:500;font-size:22px;line-height:1.3}
+.gracias .prueba{font-family:var(--texto);font-style:normal;font-size:14px;font-weight:600;line-height:1.45;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.7);color:#123e60}
+.otra{appearance:none;background:none;border:0;text-decoration:underline;text-underline-offset:3px;font-weight:700;font-size:15px;padding:6px;color:var(--manzana)}
+
+/* Cierre */
+.fin-cuento{font-family:var(--cuento);font-style:italic;font-weight:500;font-size:clamp(23px,3.6vw,30px);line-height:1.32;text-wrap:balance}
+.firma{font-size:clamp(36px,7.4vw,66px)}
+.cierre small{font-size:13px;color:var(--cielo);letter-spacing:.04em}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="mPiel" cx=".36" cy=".3" r=".85"><stop offset="0" stop-color="#b3161f"/><stop offset=".42" stop-color="#6e070d"/><stop offset=".78" stop-color="#420001"/><stop offset="1" stop-color="#190000"/></radialGradient>
+    <linearGradient id="mHoja" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6f9f62"/><stop offset="1" stop-color="#23502f"/></linearGradient>
+    <linearGradient id="mTallo" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a2110"/><stop offset="1" stop-color="#6c4524"/></linearGradient>
+    <linearGradient id="pCuerpo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dcebf6"/></linearGradient>
+    <linearGradient id="pAla" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe6f6"/></linearGradient>
+    <radialGradient id="pRosa" cx=".5" cy=".95" r=".95"><stop offset="0" stop-color="#e2688f"/><stop offset=".45" stop-color="#f7bfd1"/><stop offset="1" stop-color="#fff5f8"/></radialGradient>
+    <radialGradient id="pBlanca" cx=".5" cy=".95" r=".95"><stop offset="0" stop-color="#f4b9cb"/><stop offset=".4" stop-color="#fff0f4"/><stop offset="1" stop-color="#ffffff"/></radialGradient>
+    <radialGradient id="pCielo" cx=".5" cy=".95" r=".95"><stop offset="0" stop-color="#7dbde8"/><stop offset=".5" stop-color="#cfeafc"/><stop offset="1" stop-color="#ffffff"/></radialGradient>
+    <linearGradient id="gRama" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b2415"/><stop offset="1" stop-color="#6d4a30"/></linearGradient>
+    <linearGradient id="gHojita" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a9c99a"/><stop offset="1" stop-color="#5a8a5e"/></linearGradient>
+    <linearGradient id="gPlata" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#b9c8d6"/><stop offset=".52" stop-color="#f5fbff"/><stop offset=".75" stop-color="#8ea4b8"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <symbol id="manzana" viewBox="0 0 200 220">
+      <path fill="url(#mTallo)" d="M99 62c-2-18 0-34 9-50l10 4c-8 14-11 29-10 46Z"/>
+      <path fill="url(#mHoja)" d="M112 40c12-24 40-32 66-24-8 26-36 42-66 24Z"/>
+      <path fill="none" stroke="#1e4429" stroke-width="2" d="M116 38c18-8 34-14 56-20"/>
+      <path fill="url(#mPiel)" d="M100 66c-16-12-44-16-64-2C12 80 4 112 10 144c7 36 30 72 58 72 14 0 20-7 32-7s18 7 32 7c28 0 51-36 58-72 6-32-2-64-26-80-20-14-48-10-64 2Z"/>
+      <path fill="#1d0000" opacity=".55" d="M72 66c14 8 42 8 56 0-9 12-18 18-28 18s-19-6-28-18Z"/>
+      <ellipse cx="58" cy="108" rx="17" ry="33" fill="#fff" opacity=".42" transform="rotate(18 58 108)"/>
+      <ellipse cx="50" cy="96" rx="6" ry="13" fill="#fff" opacity=".8" transform="rotate(18 50 96)"/>
+      <path fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="5" stroke-linecap="round" d="M148 94c12 26 8 62-14 94"/>
+    </symbol>
+    <symbol id="petalos5" viewBox="-50 -50 100 100"><g id="cinco"><path id="un" d="M0-3C-24-14-25-42-7-47c3 3 5 3 7-1 3 4 5 4 7 1C25-42 24-14 0-3Z"/><use href="#un" transform="rotate(72)"/><use href="#un" transform="rotate(144)"/><use href="#un" transform="rotate(216)"/><use href="#un" transform="rotate(288)"/></g></symbol>
+    <g id="centro"><circle r="7" fill="#f7d774"/><g fill="#c88a2e"><circle cx="-5" cy="-9" r="1.5"/><circle cx="5" cy="-9" r="1.5"/><circle cx="10" cy="-1" r="1.5"/><circle cx="-10" cy="-1" r="1.5"/><circle cx="-6" cy="8" r="1.5"/><circle cx="6" cy="8" r="1.5"/></g></g>
+    <symbol id="florRosa" viewBox="-50 -50 100 100"><use href="#cinco" fill="url(#pRosa)" stroke="#d98aa4" stroke-width=".7"/><use href="#centro"/></symbol>
+    <symbol id="florBlanca" viewBox="-50 -50 100 100"><use href="#cinco" fill="url(#pBlanca)" stroke="#e8bccb" stroke-width=".7"/><use href="#centro"/></symbol>
+    <symbol id="florCielo" viewBox="-50 -50 100 100"><use href="#cinco" fill="url(#pCielo)" stroke="#8fc2e6" stroke-width=".7"/><use href="#centro"/></symbol>
+    <path id="hojita" fill="url(#gHojita)" stroke="#4d7a52" stroke-width=".7" d="M0 0C10-14 30-18 46-10 34 4 14 8 0 0Z"/>
+    <symbol id="rama" viewBox="0 0 420 300">
+      <path fill="none" stroke="url(#gRama)" stroke-width="5.5" stroke-linecap="round" d="M-6 8C60 22 118 46 170 86s96 92 150 118"/>
+      <path fill="none" stroke="url(#gRama)" stroke-width="3" stroke-linecap="round" d="M104 44c28-8 60-10 100-2M170 86c-6 34-30 66-58 92M254 150c26-16 62-24 112-18M226 128c2 34-6 66-26 96"/>
+      <use href="#hojita" transform="translate(66 24) rotate(-24) scale(.9)"/>
+      <use href="#hojita" transform="translate(142 36) rotate(12) scale(.8)"/>
+      <use href="#hojita" transform="translate(152 120) rotate(120) scale(.82)"/>
+      <use href="#hojita" transform="translate(286 138) rotate(-30) scale(.9)"/>
+      <use href="#hojita" transform="translate(296 186) rotate(60) scale(.78)"/>
+      <use href="#hojita" transform="translate(214 186) rotate(112) scale(.76)"/>
+      <use href="#florBlanca" x="20" y="-18" width="66" height="66"/>
+      <use href="#florRosa" x="92" y="4" width="78" height="78"/>
+      <use href="#florCielo" x="186" y="6" width="48" height="48"/>
+      <use href="#florBlanca" x="150" y="62" width="84" height="84"/>
+      <use href="#florRosa" x="92" y="146" width="56" height="56"/>
+      <use href="#florRosa" x="232" y="104" width="62" height="62"/>
+      <use href="#florCielo" x="344" y="106" width="44" height="44"/>
+      <use href="#florBlanca" x="296" y="170" width="60" height="60"/>
+      <use href="#florCielo" x="176" y="212" width="40" height="40"/>
+      <circle cx="396" cy="218" r="6" fill="#f7bfd1" stroke="#d98aa4"/><circle cx="372" cy="238" r="4.5" fill="#fff" stroke="#e8bccb"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="fondo" aria-hidden="true"><img src="__FOTO__" alt="" width="1400" height="1400"></div>
+<div class="velo" id="velo" aria-hidden="true"></div>
+
+<div class="telon" id="telon">
+  <div class="hoja izq" aria-hidden="true"></div>
+  <div class="hoja der" aria-hidden="true"></div>
+  <div class="escena activa" id="escena">
+    <svg class="rama a" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <svg class="rama b" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <p class="erase">Érase una vez…</p>
+    <p class="princesa">una princesa por llegar</p>
+    <svg class="manzana-grande" viewBox="0 0 200 220" aria-hidden="true"><use href="#manzana"/></svg>
+    <button class="abrir" id="abrir" type="button">Abrir invitación</button>
+  </div>
+</div>
+<div class="destello" aria-hidden="true"></div>
+
+<main>
+  <section class="inicio" aria-label="Portada" data-velo="38,0,2,0,0">
+    <svg class="rama sup-izq" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <svg class="rama sup-der" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <p class="baby js-entrada" style="--d:0"><b>Baby</b><span>Shower</span></p>
+    <h1 class="titular nombre js-entrada" id="titulo" tabindex="-1" style="--d:1">Zoe Adhara</h1>
+    <p class="padres js-entrada" style="--d:2">Hija de <b>Juan Felipe</b> y <b>Angie Catalina</b></p>
+    <p class="dia js-entrada" style="--d:3">Domingo 6 de diciembre</p>
+    <a class="abajo js-entrada" href="#cuento" style="--d:5">Sigue el cuento
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <section class="capitulo oscuro" id="cuento" data-velo="38,0,2,.87,.7">
+    <svg class="rama sup-izq" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <svg class="rama inf-der" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <div class="dentro">
+      <div class="adorno" data-b aria-hidden="true"><i></i></div>
+      <p class="relato" data-b>Érase una vez una familia que esperaba con todo el corazón a su <em>pequeña princesa</em>. Su nombre es Zoe Adhara, y antes de que llegue, Juan Felipe y Angie Catalina quieren celebrarla contigo.</p>
+      <div class="adorno" data-b aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+
+  <section class="capitulo oscuro" data-velo="66,0,1,.9,.55">
+    <div class="dentro">
+      <h2 class="titular" data-b>Espejito, espejito</h2>
+      <p class="pregunta" data-b>¿cuánto falta para celebrarla?</p>
+      <div class="espejo" id="espejo" data-b>
+        <svg class="marco-espejo" viewBox="0 0 400 540" aria-hidden="true">
+          <ellipse cx="200" cy="270" rx="176" ry="240" fill="none" stroke="url(#gPlata)" stroke-width="20"/>
+          <ellipse cx="200" cy="270" rx="189" ry="253" fill="none" stroke="#fffafa" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 17"/>
+          <ellipse cx="200" cy="270" rx="164" ry="228" fill="none" stroke="#bfe3fa" stroke-width="2"/>
+          <path fill="url(#gPlata)" stroke="#8ea4b8" stroke-width="1" d="M200 2c7 10 15 16 26 18-6 5-9 11-9 18 9-6 20-6 30 2-12 2-22 8-29 18h-36c-7-10-17-16-29-18 10-8 21-8 30-2 0-7-3-13-9-18 11-2 19-8 26-18Z"/>
+          <circle cx="200" cy="28" r="6" fill="#f7bfd1" stroke="#b9c8d6"/>
+          <use href="#florBlanca" x="12" y="442" width="84" height="84"/>
+          <use href="#florRosa" x="66" y="478" width="60" height="60"/>
+          <use href="#florCielo" x="-4" y="406" width="44" height="44"/>
+          <use href="#florBlanca" x="304" y="442" width="84" height="84"/>
+          <use href="#florRosa" x="274" y="478" width="60" height="60"/>
+          <use href="#florCielo" x="360" y="406" width="44" height="44"/>
+          <use href="#florRosa" x="178" y="500" width="44" height="44"/>
+        </svg>
+        <div class="cristal" role="timer" id="cristal">
+          <div class="dias"><span class="cifras" id="dias" aria-hidden="true"></span><small id="dias-t">días</small></div>
+          <div class="resto" aria-hidden="true">
+            <div class="unidad"><span class="cifras" id="horas"></span><small id="horas-t">horas</small></div>
+            <span class="dos">:</span>
+            <div class="unidad"><span class="cifras" id="minutos"></span><small id="minutos-t">min</small></div>
+            <span class="dos">:</span>
+            <div class="unidad"><span class="cifras" id="segundos"></span><small id="segundos-t">seg</small></div>
+          </div>
+          <p class="para">para el domingo 6 de diciembre</p>
+          <p class="gran-dia">¡Hoy es el gran día!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="respiro" aria-hidden="true" data-velo="255,240,245,0,0">
+    <svg class="rama sup-der" viewBox="0 0 420 300"><use href="#rama"/></svg>
+    <svg class="rama inf-izq" viewBox="0 0 420 300"><use href="#rama"/></svg>
+  </div>
+
+  <section class="capitulo claro" aria-labelledby="t-detalles" data-velo="255,246,249,.88,0">
+    <svg class="rama sup-izq" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <svg class="rama inf-der" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <div class="dentro">
+      <p class="etiqueta" data-b>Los detalles</p>
+      <h2 class="titular" id="t-detalles" data-b>Te esperamos</h2>
+      <div class="adorno" data-b aria-hidden="true"><i></i></div>
+      <ul class="datos">
+        <li data-b><span>Fecha</span><b>Domingo 6 de diciembre de 2026</b></li>
+        <li data-b><span>Hora</span><b class="pronto">Pronto te la contamos</b></li>
+        <li data-b><span>Lugar</span><b class="pronto">Pronto te lo contamos</b></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="capitulo claro" id="confirmar" aria-labelledby="t-confirmar" data-velo="222,241,253,.88,0">
+    <svg class="rama sup-der" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <div class="dentro">
+      <p class="etiqueta" data-b>Confirmación</p>
+      <h2 class="titular" id="t-confirmar" data-b>¿Nos acompañas?</h2>
+      <p class="guia" data-b>Cuéntanos si podrás estar con nosotros en este día tan especial.</p>
+      <form id="formulario" novalidate data-b>
+        <div>
+          <label for="nombre">Tu nombre</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="80" placeholder="Nombre y apellido">
+        </div>
+        <fieldset>
+          <legend class="rotulo">¿Podrás asistir?</legend>
+          <div class="opciones">
+            <div><input type="radio" name="asiste" id="asisteSi" value="si"><label for="asisteSi">¡Sí, ahí estaré!</label></div>
+            <div><input type="radio" name="asiste" id="asisteNo" value="no"><label for="asisteNo">No podré ir</label></div>
+          </div>
+        </fieldset>
+        <div id="bloquePersonas" hidden>
+          <span class="rotulo" id="r-personas">¿Cuántas personas vienen, contándote?</span>
+          <div class="contador-personas" role="group" aria-labelledby="r-personas">
+            <button type="button" id="menos" aria-label="Una persona menos">−</button>
+            <output id="personas" aria-live="polite">1</output>
+            <button type="button" id="mas" aria-label="Una persona más">+</button>
+          </div>
+        </div>
+        <div>
+          <label for="mensaje">Un mensaje para Zoe (opcional)</label>
+          <textarea id="mensaje" name="mensaje" maxlength="400" placeholder="Unas palabras de cariño para la bebé y sus papás"></textarea>
+        </div>
+        <p class="error" id="error" role="alert"></p>
+        <button class="enviar" id="enviar" type="submit">Enviar mi confirmación</button>
+      </form>
+      <div class="gracias" id="gracias" hidden tabindex="-1">
+        <h3 class="titular" id="graciasT"></h3>
+        <p id="graciasP"></p>
+        <p class="prueba" id="aviso-prueba" hidden>Esta invitación todavía es una versión de prueba: tu respuesta queda solo en este dispositivo y aún no les llega a los papás.</p>
+        <button class="otra" id="otra" type="button">Cambiar mi respuesta</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="capitulo oscuro cierre" aria-label="Despedida" data-velo="38,0,2,.9,.7">
+    <svg class="rama sup-izq" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <svg class="rama inf-der" viewBox="0 0 420 300" aria-hidden="true"><use href="#rama"/></svg>
+    <div class="dentro">
+      <p class="fin-cuento" data-b>Y así comienza el cuento más bonito de sus vidas. Gracias por ser parte de él.</p>
+      <div class="adorno" data-b aria-hidden="true"><i></i></div>
+      <p class="titular firma" data-b>Juan Felipe &amp; Angie Catalina</p>
+      <small data-b>Con amor, esperando a Zoe Adhara</small>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  /* Cambia aqui la hora cuando la confirmen; la zona horaria es la de Colombia */
+  var EVENTO = '2026-12-06T00:00:00-05:00';
+  /* Base de datos: cuando se conecte, llena estos datos y completa enviarConfirmacion */
+  var BASE = {url: '', clave: ''};
+
+  var html = document.documentElement;
+  var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(id){ return document.getElementById(id); };
+  html.classList.add('js', 'cerrado');
+
+  /* ---------- Telon: dos hojas con la misma escena, cada una muestra su mitad ---------- */
+  var telon = $('telon'), escena = $('escena');
+  document.querySelectorAll('.hoja').forEach(function(h){
+    var copia = escena.cloneNode(true);
+    copia.removeAttribute('id');
+    copia.classList.remove('activa');
+    copia.querySelectorAll('[id]').forEach(function(n){ n.removeAttribute('id'); });
+    var b = copia.querySelector('button');
+    var falso = document.createElement('div');
+    falso.className = b.className; falso.textContent = b.textContent;
+    b.parentNode.replaceChild(falso, b);
+    h.appendChild(copia);
+  });
+
+  $('abrir').addEventListener('click', function(){
+    if(telon.classList.contains('abriendo')) return;
+    telon.classList.add('abriendo');
+    escena.style.display = 'none';
+    html.classList.remove('cerrado');
+    html.classList.add('abierto');
+    scrollTo(0, 0);
+    recorrido();
+    bandada(16, innerWidth / 2, innerHeight * .46);
+    iniciarPetalos();
+    programarPalomas();
+    setTimeout(function(){
+      telon.remove();
+      $('titulo').focus({preventScroll: true});
+    }, quieto ? 50 : 1800);
+  });
+
+  /* ---------- Recorrido: el velo cambia de color y el contenido va bajando con el scroll ---------- */
+  var tramos = Array.prototype.map.call(document.querySelectorAll('[data-velo]'), function(el){
+    return {el: el, c: el.dataset.velo.split(',').map(Number)};
+  });
+  var piezas = Array.prototype.slice.call(document.querySelectorAll('[data-b]'));
+  var velo = $('velo');
+  function suave(t){ return t * t * (3 - 2 * t); }
+  function recorrido(){
+    var vh = innerHeight, medio = vh / 2;
+    var centros = tramos.map(function(t){ var r = t.el.getBoundingClientRect(); return r.top + r.height / 2; });
+    var i = 0;
+    while(i < tramos.length - 1 && centros[i + 1] < medio) i++;
+    var a = tramos[i].c, b = tramos[Math.min(i + 1, tramos.length - 1)].c;
+    var d = centros[Math.min(i + 1, tramos.length - 1)] - centros[i];
+    var k = d > 0 ? suave(Math.max(0, Math.min(1, (medio - centros[i]) / d))) : 0;
+    /* El color cambia al centro del tramo, ya con el texto anterior saliendo */
+    var mezcla = [0, 1, 2, 3, 4].map(function(n){ return a[n] + (b[n] - a[n]) * k; });
+    velo.style.backgroundColor = 'rgba(' + Math.round(mezcla[0]) + ',' + Math.round(mezcla[1]) + ',' + Math.round(mezcla[2]) + ',' + mezcla[3].toFixed(3) + ')';
+    velo.style.setProperty('--borde', mezcla[4].toFixed(3));
+    if(quieto) return;
+    piezas.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      var entra = Math.max(0, Math.min(1, (vh * .96 - r.top) / (vh * .3)));
+      var sale = Math.max(0, Math.min(1, r.bottom / (vh * .14)));
+      var e = suave(entra);
+      el.style.opacity = Math.min(e, suave(sale)).toFixed(3);
+      /* Cada pieza baja hasta su lugar, como si cayera despacio */
+      el.style.transform = 'translateY(' + ((1 - e) * -46).toFixed(1) + 'px)';
+    });
+  }
+  addEventListener('scroll', recorrido, {passive: true});
+  addEventListener('resize', recorrido);
+  recorrido();
+
+  /* ---------- Palomas ---------- */
+  function htmlPaloma(){
+    return '<svg viewBox="0 0 120 80" aria-hidden="true">' +
+      '<path class="ala lejos" fill="#bcd8ec" d="M70 38C66 20 56 6 36 0c4 12 5 20 3 27 8 8 19 13 31 15Z"/>' +
+      '<path fill="url(#pCuerpo)" stroke="#a9c6dc" stroke-width=".8" d="M20 44C30 30 52 28 70 34c8-10 22-10 28-1l12 4-12 3c-4 12-20 20-38 20-16 0-30-4-52 2 6-8 8-12 12-18Z"/>' +
+      '<path fill="#f0a35e" d="M100 34l11 3.4-11 2.6Z"/>' +
+      '<circle cx="92" cy="33" r="1.8" fill="#260002"/>' +
+      '<path class="ala" fill="url(#pAla)" stroke="#a9c6dc" stroke-width=".8" d="M66 38C58 18 44 4 22 2c6 12 8 18 6 24 10 8 24 14 38 16Z"/>' +
+      '<path fill="none" stroke="#a9c6dc" stroke-width=".9" d="M60 36C50 26 42 18 32 13M52 37C44 32 38 28 31 25"/></svg>';
+  }
+  function paloma(x0, y0, x1, y1, tam, dur, retraso){
+    var el = document.createElement('div');
+    el.className = 'paloma';
+    el.setAttribute('aria-hidden', 'true');
+    el.style.setProperty('--t', tam + 'px');
+    el.style.setProperty('--f', (.26 + Math.random() * .16).toFixed(2) + 's');
+    el.innerHTML = htmlPaloma();
+    document.body.appendChild(el);
+    var giro = x1 < x0 ? -1 : 1;
+    var cx = (x0 + x1) / 2 + (Math.random() - .5) * 180;
+    var cy = (y0 + y1) / 2 - 40 - Math.random() * 110;
+    var inclina = (y1 < y0 ? -8 : 4) * giro;
+    var a = el.animate([
+      {transform: 'translate(' + x0 + 'px,' + y0 + 'px) scale(' + (giro * .5) + ',.5) rotate(' + inclina + 'deg)', opacity: 0},
+      {opacity: 1, offset: .1},
+      {transform: 'translate(' + cx + 'px,' + cy + 'px) scale(' + (giro * .9) + ',.9) rotate(' + inclina + 'deg)', offset: .55},
+      {transform: 'translate(' + x1 + 'px,' + y1 + 'px) scale(' + giro + ',1) rotate(' + inclina + 'deg)', opacity: 1}
+    ], {duration: dur, delay: retraso, easing: 'cubic-bezier(.3,.1,.5,1)', fill: 'both'});
+    a.onfinish = function(){ el.remove(); };
+  }
+  function bandada(n, x, y){
+    if(quieto) return;
+    for(var i = 0; i < n; i++){
+      var ang = -Math.PI * (.08 + .84 * (i + Math.random()) / n);
+      var lejos = Math.max(innerWidth, innerHeight) * 1.05;
+      var tam = 54 + Math.random() * 46;
+      paloma(x - tam / 2, y - 26, x + Math.cos(ang) * lejos, y + Math.sin(ang) * lejos, tam, 2600 + Math.random() * 1500, i * 55);
+    }
+  }
+  function programarPalomas(){
+    if(quieto) return;
+    setTimeout(function(){
+      if(!document.hidden){
+        var derecha = Math.random() < .5, h = innerHeight * (.08 + Math.random() * .34), cuantas = 1 + Math.floor(Math.random() * 3);
+        for(var i = 0; i < cuantas; i++){
+          var t = 38 + Math.random() * 34, dy = i * 42;
+          paloma(derecha ? -90 : innerWidth + 90, h + dy, derecha ? innerWidth + 90 : -90, h + dy - 60, t, 8200 + Math.random() * 3500, i * 500);
+        }
+      }
+      programarPalomas();
+    }, 6500 + Math.random() * 6000);
+  }
+
+  /* ---------- Petalos y destellos que caen ---------- */
+  function iniciarPetalos(){
+    if(quieto) return;
+    var c = document.createElement('canvas');
+    c.className = 'petalos';
+    c.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(c);
+    var g = c.getContext('2d'), W, H, r = Math.min(devicePixelRatio || 1, 2);
+    function medir(){ W = innerWidth; H = innerHeight; c.width = W * r; c.height = H * r; g.setTransform(r, 0, 0, r, 0, 0); }
+    medir(); addEventListener('resize', medir);
+    var colores = ['#f9d3df', '#ee9db7', '#ffffff', '#bfe3fa'];
+    var ps = [], chispas = [], i;
+    for(i = 0; i < 18; i++){
+      ps.push({x: Math.random() * W, y: Math.random() * H, t: 5 + Math.random() * 7, v: .3 + Math.random() * .55, f: Math.random() * 6, vf: .008 + Math.random() * .014, g: Math.random() * 6, vg: (Math.random() - .5) * .025, c: colores[i % 4]});
+    }
+    for(i = 0; i < 16; i++){
+      chispas.push({x: Math.random(), y: Math.random(), t: 2.5 + Math.random() * 3.5, f: Math.random() * 6, vf: .018 + Math.random() * .03});
+    }
+    (function cuadro(){
+      requestAnimationFrame(cuadro);
+      if(document.hidden) return;
+      g.clearRect(0, 0, W, H);
+      ps.forEach(function(p){
+        p.y += p.v; p.f += p.vf; p.g += p.vg; p.x += Math.sin(p.f) * .55;
+        if(p.y > H + 16){ p.y = -16; p.x = Math.random() * W; }
+        g.save(); g.translate(p.x, p.y); g.rotate(p.g);
+        g.scale(1, .55 + Math.abs(Math.sin(p.f * 1.6)) * .45);
+        g.globalAlpha = .82; g.fillStyle = p.c;
+        g.beginPath(); g.moveTo(0, -p.t);
+        g.bezierCurveTo(p.t, -p.t * .6, p.t * .8, p.t * .7, 0, p.t);
+        g.bezierCurveTo(-p.t * .8, p.t * .7, -p.t, -p.t * .6, 0, -p.t);
+        g.fill(); g.restore();
+      });
+      g.fillStyle = '#fff';
+      chispas.forEach(function(s){
+        s.f += s.vf;
+        var a = Math.pow(Math.max(0, Math.sin(s.f)), 3);
+        if(a < .02) return;
+        var x = s.x * W, y = s.y * H, t = s.t * (.5 + a * .9), q = t * .14;
+        g.globalAlpha = a;
+        g.beginPath(); g.moveTo(x, y - t);
+        g.quadraticCurveTo(x + q, y - q, x + t, y); g.quadraticCurveTo(x + q, y + q, x, y + t);
+        g.quadraticCurveTo(x - q, y + q, x - t, y); g.quadraticCurveTo(x - q, y - q, x, y - t);
+        g.fill();
+      });
+      g.globalAlpha = 1;
+    })();
+  }
+
+  /* ---------- Espejo: contador exacto, calculado siempre desde el reloj ---------- */
+  var meta = new Date(EVENTO).getTime();
+  var previo = {};
+  function pintarCifras(el, clave, valor, minimo){
+    var txt = String(valor);
+    while(txt.length < minimo) txt = '0' + txt;
+    if(previo[clave] === txt) return;
+    var antes = previo[clave] || '';
+    if(antes.length !== txt.length){
+      el.textContent = '';
+      for(var k = 0; k < txt.length; k++){
+        var nueva = document.createElement('span'); nueva.className = 'casilla';
+        nueva.innerHTML = '<span></span>'; nueva.firstChild.textContent = txt[k];
+        el.appendChild(nueva);
+      }
+    } else {
+      for(var i = 0; i < txt.length; i++){
+        if(txt[i] === antes[i]) continue;
+        var cas = el.children[i];
+        while(cas.children.length > 1) cas.removeChild(cas.firstChild);
+        var viejo = cas.firstChild;
+        var nuevo = document.createElement('span');
+        nuevo.textContent = txt[i];
+        if(!quieto){ viejo.className = 'sale'; nuevo.className = 'entra'; }
+        else { cas.removeChild(viejo); }
+        cas.appendChild(nuevo);
+      }
+    }
+    previo[clave] = txt;
+  }
+  function rotulo(id, n, uno, varios){ $(id).textContent = n === 1 ? uno : varios; }
+  var ultimoAria = '';
+  function tic(){
+    var falta = meta - Date.now();
+    if(falta <= 0){ $('espejo').classList.add('fin'); $('cristal').setAttribute('aria-label', '¡Hoy es el gran día!'); return; }
+    var s = Math.floor(falta / 1000);
+    var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), mi = Math.floor(s % 3600 / 60), se = s % 60;
+    pintarCifras($('dias'), 'd', d, 2);
+    pintarCifras($('horas'), 'h', h, 2);
+    pintarCifras($('minutos'), 'm', mi, 2);
+    pintarCifras($('segundos'), 's', se, 2);
+    rotulo('dias-t', d, 'día', 'días');
+    rotulo('horas-t', h, 'hora', 'horas');
+    var aria = 'Faltan ' + d + (d === 1 ? ' día, ' : ' días, ') + h + (h === 1 ? ' hora y ' : ' horas y ') + mi + (mi === 1 ? ' minuto' : ' minutos');
+    if(aria !== ultimoAria){ $('cristal').setAttribute('aria-label', aria); ultimoAria = aria; }
+    /* Se alinea con el cambio exacto de segundo para que nunca se atrase ni salte */
+    setTimeout(tic, (falta % 1000) + 12);
+  }
+  tic();
+
+  /* ---------- Confirmacion ---------- */
+  var CLAVE = 'zoe.confirmacion', personas = 1;
+  function leer(){ try { return JSON.parse(localStorage.getItem(CLAVE)); } catch(e){ return null; } }
+  function guardar(d){ try { if(d) localStorage.setItem(CLAVE, JSON.stringify(d)); else localStorage.removeItem(CLAVE); } catch(e){} }
+  function enviarConfirmacion(datos){
+    /* Mientras no haya base de datos, la respuesta se queda en este dispositivo */
+    guardar(datos);
+    return Promise.resolve({guardadoReal: !!BASE.url});
+  }
+  function pintarPersonas(){ $('personas').textContent = personas; }
+  $('menos').addEventListener('click', function(){ personas = Math.max(1, personas - 1); pintarPersonas(); });
+  $('mas').addEventListener('click', function(){ personas = Math.min(15, personas + 1); pintarPersonas(); });
+  document.querySelectorAll('input[name=asiste]').forEach(function(r){
+    r.addEventListener('change', function(){ $('bloquePersonas').hidden = !$('asisteSi').checked; $('error').textContent = ''; recorrido(); });
+  });
+  function mostrarGracias(d, real){
+    var nombre = d.nombre.split(/\s+/)[0];
+    $('graciasT').textContent = d.asiste === 'si' ? '¡Gracias, ' + nombre + '!' : 'Te extrañaremos, ' + nombre;
+    $('graciasP').textContent = d.asiste === 'si'
+      ? (d.personas === 1 ? 'Te esperamos el domingo 6 de diciembre.' : 'Los esperamos a los ' + d.personas + ' el domingo 6 de diciembre.')
+      : 'Gracias por avisarnos. Zoe Adhara te manda un abrazo enorme.';
+    $('aviso-prueba').hidden = real;
+    $('formulario').hidden = true;
+    $('gracias').hidden = false;
+  }
+  $('formulario').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var nombre = $('nombre').value.trim();
+    var si = $('asisteSi').checked, no = $('asisteNo').checked;
+    if(nombre.length < 2){ $('error').textContent = 'Escribe tu nombre para saber quién confirma.'; $('nombre').focus(); return; }
+    if(!si && !no){ $('error').textContent = 'Elige si podrás asistir o no.'; $('asisteSi').focus(); return; }
+    $('error').textContent = '';
+    var datos = {nombre: nombre, asiste: si ? 'si' : 'no', personas: si ? personas : 0, mensaje: $('mensaje').value.trim()};
+    $('enviar').disabled = true;
+    enviarConfirmacion(datos).then(function(r){
+      $('enviar').disabled = false;
+      mostrarGracias(datos, r.guardadoReal);
+      $('gracias').focus({preventScroll: true});
+      recorrido();
+      var cuadro = $('gracias').getBoundingClientRect();
+      if(si) bandada(9, cuadro.left + cuadro.width / 2, cuadro.top + 40);
+    }).catch(function(){
+      $('enviar').disabled = false;
+      $('error').textContent = 'No se pudo enviar. Revisa tu conexión e inténtalo otra vez.';
+    });
+  });
+  $('otra').addEventListener('click', function(){
+    guardar(null);
+    $('gracias').hidden = true;
+    $('formulario').hidden = false;
+    $('nombre').focus();
+    recorrido();
+  });
+  var anterior = leer();
+  if(anterior && anterior.nombre && (anterior.asiste === 'si' || anterior.asiste === 'no')){
+    $('nombre').value = anterior.nombre;
+    $('mensaje').value = anterior.mensaje || '';
+    personas = anterior.personas || 1; pintarPersonas();
+    $(anterior.asiste === 'si' ? 'asisteSi' : 'asisteNo').checked = true;
+    $('bloquePersonas').hidden = anterior.asiste !== 'si';
+    mostrarGracias(anterior, !!BASE.url);
+  }
+})();
+</script>
